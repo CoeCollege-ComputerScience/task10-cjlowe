@@ -8,9 +8,8 @@ public class Calculator extends JFrame {
 
     public Calculator() {
         setTitle("Calculator");
-        setPreferredSize(new Dimension(350, 450));
+        setPreferredSize(new Dimension(400, 400));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Center on screen
         setLayout(new BorderLayout(10, 10));
 
         display = new JTextField("0");
@@ -41,5 +40,6 @@ public class Calculator extends JFrame {
         }
 
         add(buttonPanel, BorderLayout.CENTER);
+        pack();
     }
 }
