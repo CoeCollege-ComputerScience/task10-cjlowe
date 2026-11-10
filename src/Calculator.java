@@ -5,8 +5,10 @@ public class Calculator extends JFrame {
 
     private JTextField display;
     private JPanel buttonPanel;
+    private final Interpreter interpreter;
 
     public Calculator() {
+        interpreter = new Interpreter();
         setTitle("Calculator");
         setPreferredSize(new Dimension(400, 400));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,10 +38,29 @@ public class Calculator extends JFrame {
         for (String text : buttons) {
             JButton button = new JButton(text);
             button.setFont(new Font("Arial", Font.BOLD, 12));
+            button.addActionListener(new NumberListener(this));
             buttonPanel.add(button);
         }
 
         add(buttonPanel, BorderLayout.CENTER);
         pack();
+    }
+
+    private void updateDisplay(String change){
+        if (!display.getText().equalsIgnoreCase("0")){
+            display.setText(display.getText() + " " + change);
+        }
+        else{
+            display.setText(change);
+        }
+    }
+
+    public void react(String change){
+        if (!change.equalsIgnoreCase("=")){
+            updateDisplay(change);
+        }
+        else{
+            display.setText(interpreter.interpret(display.getText()));
+        }
     }
 }
